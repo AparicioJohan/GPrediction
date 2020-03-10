@@ -28,7 +28,6 @@ phen <- arrange(phen, get(genoname))
 
 # traits
 traits <- names(phen)[names(phen)!=genoname]
-traits <- traits[1:2]
 
 if (sum(traits%in%names(phen))!=length(traits)) {
   stop("There are missings traits")
