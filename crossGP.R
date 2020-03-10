@@ -5,11 +5,11 @@ library(BGLR)
 library(readr)
 
 
-geno <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/ADP_VEC_VEF/ADP_VEC_VEF_repMasked_q40_s_fi_maf1%_oh1%_i900_imputed_rrBLUP.in"
-samp <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/ADP_VEC_VEF/ADP_VEC_VEF_repMasked_q40_s_fi_maf1%_oh1%_i900_imputed_rrBLUP_samples.txt"
-phen <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/Phenotypic Analysis.csv"
+#geno <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/ADP_VEC_VEF/ADP_VEC_VEF_repMasked_q40_s_fi_maf1%_oh1%_i900_imputed_rrBLUP.in"
+#samp <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/ADP_VEC_VEF/ADP_VEC_VEF_repMasked_q40_s_fi_maf1%_oh1%_i900_imputed_rrBLUP_samples.txt"
+#phen <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/Phenotypic Analysis.csv"
 
-prior <- c("ASReml","RKHS","sommer")
+#prior <- c("ASReml","RKHS","sommer")
 
 
 "crossGP" <- function(geno,samp,phen,prior, niter=50, testporc=0.3){
@@ -200,5 +200,6 @@ out_table
 
 }
 
-out_table <- crossGP(geno,samp,phen,prior,niter = 2,testporc = 0.3)
+## Example ##
+# out_table <- crossGP(geno,samp,phen,prior,niter = 2,testporc = 0.3)
 
