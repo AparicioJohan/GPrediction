@@ -196,7 +196,7 @@ for (i in traits  ) {
   
 }
 
-out_table
+return(out_table)
 
 }
 
