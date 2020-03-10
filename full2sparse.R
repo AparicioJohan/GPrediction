@@ -1,12 +1,11 @@
 
-library(data.table)
 
 full2sparse <- function(mat) {
   if (is.null(colnames(mat))) {
    colnames(mat) <- 1:ncol(mat)
   }
   regions <- as.numeric(colnames(mat))
-  sparse <- as.data.table(expand.grid(regions, regions))
+  sparse <- data.table::as.data.table(expand.grid(regions, regions))
   up.triangle <- c(upper.tri(mat, diag = TRUE))
   sparse <- cbind(sparse, c(mat), up.triangle)
   colnames(sparse) <- c("region1", "region2", "IF", "up.triangle")
