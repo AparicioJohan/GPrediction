@@ -189,7 +189,7 @@ for (i in traits  ) {
     hf <- c(hrk[pop],hrk2[pop],hrk3[pop])
     corf <- c(corrk[pop],corrk2[pop],corrk3[pop])
     tmp = data.frame(prior = prior, trait = i, randomPop = paste0("Pop",pop), hrk = hf,  corr=corf , finishedAt = paste0(Sys.time()))
-    out_table <<- rbind(out_table,tmp)
+    out_table <- rbind(out_table,tmp)
     
     
   }
