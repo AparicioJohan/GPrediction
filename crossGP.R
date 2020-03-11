@@ -55,6 +55,7 @@ library(readr)
   message("\nprior", "\ttrait", "\trandomPop", "\thrk", "\tcorr" , "\tfinishedAt" )
   #--------------------------------------------------------------------------
   
+  niter <- ifelse(testporc==0,yes = 1,no = niter )
   
   for (i in traits  ) {
     
@@ -108,6 +109,8 @@ library(readr)
       
       yNA<<-y
       yNA[tst]<<-NA
+      
+      if (testporc==0) tst <- 1:n
       
       # ------ asreml 
       
@@ -189,7 +192,7 @@ library(readr)
       if("BRR"%in%prior){
         
         ETA = list(list(model="BRR",    X=GT))  
-
+        
         fm4 = BGLR( y=yNA, ETA=ETA, 
                     nIter=10000, burnIn=1000, thin=5, 
                     verbose=FALSE)
@@ -283,21 +286,19 @@ library(readr)
         message(prior[prior=="BLasso"],"\t",i,"\t",paste("Pop",pop,sep="_"), "\t" ,hrk8[pop], "\t",corrk8[pop], "\t" , paste0(Sys.time()))
         
       }
-      
-      
+         
       # final results ---------
       
       hf <- c(hrk[pop],hrk2[pop],hrk3[pop],hrk4[pop],hrk5[pop],hrk6[pop],hrk7[pop],hrk8[pop])
       corf <- c(corrk[pop],corrk2[pop],corrk3[pop],corrk4[pop],corrk5[pop],corrk6[pop],corrk7[pop],corrk8[pop])
       tmp = data.frame(prior = prior, trait = i, randomPop = paste0("Pop",pop), hrk = hf,  corr=corf , finishedAt = paste0(Sys.time()))
       out_table <- rbind(out_table,tmp)
-      
-      
+       
     }
-    
+   
   }
   
-  message("\n[]===========================End================================[]") 
+  message("\n[]========================== End ===============================[]") 
   return(out_table)
   
 }
