@@ -10,8 +10,9 @@ library(readr)
 #phen <- "D:/OneDrive - CGIAR/2020/Documento presentacion 4/Phenotypic Analysis.csv"
 
 #prior <- c("ASReml","RKHS","sommer")
+#traits <- c("Dar16C_hiP", "Dar16C_loP")
 
-"crossGP" <- function(geno,samp,phen,prior, niter=50, testporc=0.3){
+"crossGP" <- function(geno,samp,phen,prior, niter=50, testporc=0.3, traits=NULL){
   
   # Samples 
   samp = read.delim(samp, header = F)[,1]
@@ -26,7 +27,7 @@ library(readr)
   phen <- arrange(phen, get(genoname))
   
   # traits
-  traits <- names(phen)[names(phen)!=genoname]
+  if(is.null(traits)) traits <- names(phen)[names(phen)!=genoname]
   
   if (sum(traits%in%names(phen))!=length(traits)) {
     stop("There are missings traits")
