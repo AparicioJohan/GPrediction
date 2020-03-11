@@ -33,7 +33,7 @@ library(readr)
   } else {
     message("[]==============================================================[]")
     message("[]==================== Genomic Prediction  =====================[]")
-    message("[]============= ASReml - RKHS - sommer package  ================[]")
+    message("[]============= ASReml - BGLR - sommer package  ================[]")
     message("[]======= Last update: 2020-03-10  Johan Aparicio ==============[]")
     message("[]==============================================================[]\n")
   }
