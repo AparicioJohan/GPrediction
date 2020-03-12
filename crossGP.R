@@ -56,6 +56,12 @@ library(readr)
   message("\nprior", "\ttrait", "\trandomPop", "\thrk", "\tcorr" , "\tfinishedAt" )
   #--------------------------------------------------------------------------
   
+  modMar <- c("BRR","BayesA","BayesB","BayesC","BLasso")
+  stI_list <- matrix(data=list(), nrow=length(traits), ncol=length(modMar), 
+                     dimnames=list(traits, modMar))
+  
+  #--------------------------------------------------------------------------
+  
   niter <- ifelse(testporc==0,yes = 1,no = niter )
   
   for (i in traits  ) {
@@ -103,6 +109,7 @@ library(readr)
     # asr / rkhs / som / BRR / bayA / bayB / bayC / BL
     hrk <- hrk2 <- hrk3 <- hrk3 <- hrk4 <- hrk5 <- hrk6 <- hrk7 <- hrk8 <- c()
     corrk <- corrk2 <- corrk3 <- corrk4 <- corrk5 <- corrk6 <- corrk7 <- corrk8 <- c()
+    fm <- fm2 <- fm3 <- fm4 <- fm5 <- fm6 <- fm7 <- fm8 <- list()
     
     for (pop in 1:niter) {
       
@@ -287,21 +294,33 @@ library(readr)
         message(prior[prior=="BLasso"],"\t",i,"\t",paste("Pop",pop,sep="_"), "\t" ,hrk8[pop], "\t",corrk8[pop], "\t" , paste0(Sys.time()))
         
       }
-         
+      
       # final results ---------
       
       hf <- c(hrk[pop],hrk2[pop],hrk3[pop],hrk4[pop],hrk5[pop],hrk6[pop],hrk7[pop],hrk8[pop])
       corf <- c(corrk[pop],corrk2[pop],corrk3[pop],corrk4[pop],corrk5[pop],corrk6[pop],corrk7[pop],corrk8[pop])
       tmp = data.frame(prior = prior, trait = i, randomPop = paste0("Pop",pop), hrk = hf,  corr=corf , finishedAt = paste0(Sys.time()))
       out_table <- rbind(out_table,tmp)
-       
+      
     }
-   
+    
+    
+    if(testporc==0&sum(prior%in%modMar)>=1){
+      stI_list[[i, 1]] <- fm4
+      stI_list[[i, 2]] <- fm5
+      stI_list[[i, 3]] <- fm6
+      stI_list[[i, 4]] <- fm7
+      stI_list[[i, 5]] <- fm8
+    }
+    
+    
   }
   
   message("\n[]============================ End =============================[]\n") 
-  return(out_table)
   
+  return(list(data = out_table, 
+              models = stI_list ))
+
 }
 
 ## Example ##
