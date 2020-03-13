@@ -133,7 +133,7 @@ library(readr)
         Vary<-var(yNA,na.rm=TRUE)
         hrk[pop] <- round(1-summary(fm)$varcomp[2,1]/Vary,4)
         
-        predGBLUPcv<-predict(fm,classify=genoname,sed=T)$pvals
+        predGBLUPcv<-predict(fm,classify="level",sed=T)$pvals
         predGBLUPcv<-predGBLUPcv[,2]
         
         corrk[pop] <- cor(y[tst],predGBLUPcv[tst]) %>% round(.,4)
